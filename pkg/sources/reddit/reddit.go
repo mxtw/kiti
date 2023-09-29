@@ -2,8 +2,10 @@ package reddit
 
 import (
 	"fmt"
-	"github.com/mxtw/kitigo/pkg/web"
 	"math/rand"
+
+	"github.com/mxtw/kitigo/pkg/util"
+	"github.com/mxtw/kitigo/pkg/web"
 )
 
 type redditData struct {
@@ -22,13 +24,20 @@ type childData struct {
 	Url string `json:"url"`
 }
 
-func GetRandomUrl(subreddit string) string {
+func GetRandomUrlFromSubreddit(subreddit string) string {
 
 	url := fmt.Sprintf("https://reddit.com/r/%s/new.json", subreddit)
 
 	var reddit redditData
 	web.Get(url, &reddit)
 
-	len := len(reddit.Data.Children)
-	return reddit.Data.Children[rand.Intn(len)].Data.Url
+	pictures := make([]string, 0)
+
+	for _, child := range reddit.Data.Children {
+		if util.IsFileValid(child.Data.Url) {
+			pictures = append(pictures, child.Data.Url)
+		}
+	}
+
+	return pictures[rand.Intn(len(pictures))]
 }
