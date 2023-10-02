@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"math/rand"
 
-	"github.com/mxtw/kitigo/pkg/util"
-	"github.com/mxtw/kitigo/pkg/web"
+	"github.com/mxtw/kiti/pkg/util"
+	"github.com/mxtw/kiti/pkg/web"
 )
 
 type redditData struct {

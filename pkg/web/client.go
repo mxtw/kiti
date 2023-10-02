@@ -7,7 +7,7 @@ import (
 )
 
 // TODO set user agent properly
-var user_agent = "kitigo 0.0.1"
+var user_agent = "kiti 0.0.1"
 
 func Get(url string, out interface{}) interface{} {
 

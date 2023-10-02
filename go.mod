@@ -1,4 +1,4 @@
-module github.com/mxtw/kitigo
+module github.com/mxtw/kiti
 
 go 1.21.1
 

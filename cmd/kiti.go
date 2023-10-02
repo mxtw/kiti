@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/elias-gill/wallpaper"
-	"github.com/mxtw/kitigo/pkg/sources/reddit"
+	"github.com/mxtw/kiti/pkg/sources/reddit"
 )
 
 var version = "0.0.1"
