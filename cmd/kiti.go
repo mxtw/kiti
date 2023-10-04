@@ -12,9 +12,12 @@ var version = "0.0.1"
 func main() {
 	// TODO get this from cli arg and/or config file
 	// TODO handle different sources
-	url := reddit.GetRandomUrlFromSubreddit("blurrypicturesofcats")
+	url, err := reddit.GetRandomUrlFromSubreddit("blurrypicturesofcats")
+	if err != nil {
+		fmt.Println(err)
+	}
 
-	err := wallpaper.SetFromURL(url)
+	err = wallpaper.SetFromURL(url)
 	if err != nil {
 		fmt.Println(err)
 	}

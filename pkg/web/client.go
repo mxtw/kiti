@@ -2,6 +2,7 @@ package web
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 )
@@ -9,7 +10,7 @@ import (
 // TODO set user agent properly
 var user_agent = "kiti 0.0.1"
 
-func Get(url string, out interface{}) interface{} {
+func Get(url string, out interface{}) error {
 
 	client := &http.Client{}
 
@@ -22,14 +23,19 @@ func Get(url string, out interface{}) interface{} {
 	res, err := client.Do(req)
 	if err != nil {
 		fmt.Println(err)
+		return errors.New("something went wrong://")
 	}
 	if res.StatusCode != 200 {
 		fmt.Println(res.Status)
+		return errors.New(res.Status)
 	}
 
 	defer res.Body.Close()
 
 	err = json.NewDecoder(res.Body).Decode(&out)
+	if err != nil {
+		fmt.Println(err)
+	}
 
-	return out
+	return nil
 }

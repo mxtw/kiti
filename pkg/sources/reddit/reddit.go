@@ -1,6 +1,7 @@
 package reddit
 
 import (
+	"errors"
 	"fmt"
 	"math/rand"
 
@@ -24,12 +25,16 @@ type childData struct {
 	Url string `json:"url"`
 }
 
-func GetRandomUrlFromSubreddit(subreddit string) string {
+func GetRandomUrlFromSubreddit(subreddit string) (string, error) {
 
 	url := fmt.Sprintf("https://reddit.com/r/%s/new.json", subreddit)
 
 	var reddit redditData
-	web.Get(url, &reddit)
+	err := web.Get(url, &reddit)
+	if err != nil {
+		fmt.Println(err)
+		return "", errors.New("problem while fetching data from source")
+	}
 
 	pictures := make([]string, 0)
 
@@ -39,5 +44,5 @@ func GetRandomUrlFromSubreddit(subreddit string) string {
 		}
 	}
 
-	return pictures[rand.Intn(len(pictures))]
+	return pictures[rand.Intn(len(pictures))], nil
 }
