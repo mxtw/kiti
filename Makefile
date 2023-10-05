@@ -1,15 +1,14 @@
 LDFLAGS="-w -s"
 
 build:
-	GOOS=linux go build -o ./dist/kiti ldflags=${LDFLAGS} ./cmd/kiti.go
+	GOOS=linux go build -o ./dist/kiti -ldflags=${LDFLAGS}
 
 build_windows:
-	GOOS=windows go build -o ./dist/kiti.exe -ldflags=${LDFLAGS} ./cmd/kiti.go
+	GOOS=windows go build -o ./dist/kiti.exe -ldflags=${LDFLAGS}
+
+# TODO build other archs, build darwin
 
 all: build build_windows
 
 clean:
 	rm -rf ./dist
-
-install:
-	go install ./cmd/kiti.go
