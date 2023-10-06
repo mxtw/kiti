@@ -5,7 +5,9 @@ various sources written in Go.
 
 ## Installation
 
-`go install github.com/mxtw/kiti@latest`
+```shell
+go install github.com/mxtw/kiti@latest
+```
 
 If you don't use one of the common DEs you will also require `feh` (X11) or
 `swaybg` (Wayland) to set the wallpaper.
