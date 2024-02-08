@@ -23,7 +23,9 @@ var (
 				fmt.Println(err)
 			}
 
-			err = wallpaper.SetFromURL(url)
+			// TODO set different modes
+			mode := "fill"
+			err = wallpaper.SetFromURL(url, mode)
 			if err != nil {
 				fmt.Println(err)
 			}
