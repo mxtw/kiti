@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/elias-gill/wallpaper"
 	"github.com/mxtw/kiti/pkg/sources/reddit"
+	"github.com/mxtw/kiti/pkg/wallpaper"
 	"github.com/spf13/cobra"
 )
 
@@ -23,7 +23,7 @@ var (
 				fmt.Println(err)
 			}
 
-			err = wallpaper.SetFromURL(url)
+			err = wallpaper.SetFromUrl(url)
 			if err != nil {
 				fmt.Println(err)
 			}

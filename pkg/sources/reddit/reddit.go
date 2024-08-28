@@ -30,7 +30,7 @@ func GetRandomUrlFromSubreddit(subreddit string) (string, error) {
 	url := fmt.Sprintf("https://reddit.com/r/%s/new.json", subreddit)
 
 	var reddit redditData
-	err := web.Get(url, &reddit)
+	err := web.GetData(url, &reddit)
 	if err != nil {
 		fmt.Println(err)
 		return "", errors.New("problem while fetching data from source")
