@@ -3,7 +3,6 @@ package reddit
 import (
 	"errors"
 	"fmt"
-	"math/rand"
 
 	"github.com/mxtw/kiti/pkg/util"
 	"github.com/mxtw/kiti/pkg/web"
@@ -29,8 +28,10 @@ func GetRandomUrlFromSubreddit(subreddit string) (string, error) {
 
 	url := fmt.Sprintf("https://reddit.com/r/%s/new.json", subreddit)
 
+	wc := web.NewClient()
+
 	var reddit redditData
-	err := web.GetData(url, &reddit)
+	err := wc.GetData(url, &reddit)
 	if err != nil {
 		fmt.Println(err)
 		return "", errors.New("problem while fetching data from source")
@@ -44,5 +45,5 @@ func GetRandomUrlFromSubreddit(subreddit string) (string, error) {
 		}
 	}
 
-	return pictures[rand.Intn(len(pictures))], nil
+	return util.RandomImage(pictures), nil
 }

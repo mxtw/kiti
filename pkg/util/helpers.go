@@ -2,6 +2,7 @@ package util
 
 import (
 	"fmt"
+	"math/rand"
 	"regexp"
 )
 
@@ -13,4 +14,8 @@ func IsFileValid(input string) bool {
 		fmt.Println(err)
 	}
 	return re.Match([]byte(input))
+}
+
+func RandomImage(pictures []string) string {
+	return pictures[rand.Intn(len(pictures))]
 }

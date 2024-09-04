@@ -17,6 +17,7 @@ You will need to have `feh` (X11) or `swaybg` (Wayland) to set the wallpaper.
 Image sources supported so far
 
 - [x] Reddit
+- [x] Imgur
 - [ ] Custom
 - [ ] ...
 
@@ -27,6 +28,7 @@ Image sources supported so far
 - [ ] support of specific desktop environments
 - [ ] Windows support
 - [ ] MacOS support
+- [ ] better documentation :)
 
 ## Inspirations
 

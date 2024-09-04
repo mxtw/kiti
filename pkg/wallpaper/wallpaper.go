@@ -43,7 +43,9 @@ func setWallpaper(file string) error {
 }
 
 func SetFromUrl(url string) error {
-	file, err := web.DownloadImage(url)
+
+	// FIXME: actually handle the web client properly here
+	file, err := web.NewClient().DownloadImage(url)
 	if err != nil {
 		return err
 	}

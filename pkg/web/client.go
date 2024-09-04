@@ -9,17 +9,34 @@ import (
 	"os"
 )
 
-// TODO set user agent properly
-var user_agent = "kiti 0.0.1"
+type webClient struct {
+	Authorization string
+	UserAgent     string
+	Client        *http.Client
+}
 
-func get(url string) (*http.Response, error) {
+func NewClient() webClient {
+	return webClient{
+		Authorization: "",
+		UserAgent:     "kiti 0.0.1",
+		Client:        &http.Client{},
+	}
+}
+
+func (wc webClient) get(url string) (*http.Response, error) {
 	client := &http.Client{}
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		fmt.Println(err)
 	}
-	req.Header.Set("User-Agent", user_agent)
+
+	if wc.UserAgent != "" {
+		req.Header.Set("User-Agent", wc.UserAgent)
+	}
+	if wc.Authorization != "" {
+		req.Header.Set("Authorization", wc.Authorization)
+	}
 
 	res, err := client.Do(req)
 	if err != nil {
@@ -34,9 +51,9 @@ func get(url string) (*http.Response, error) {
 	return res, nil
 }
 
-func GetData(url string, out interface{}) error {
+func (wc webClient) GetData(url string, out interface{}) error {
 
-	res, err := get(url)
+	res, err := wc.get(url)
 	if err != nil {
 		return err
 	}
@@ -51,8 +68,8 @@ func GetData(url string, out interface{}) error {
 	return nil
 }
 
-func DownloadImage(url string) (string, error) {
-	res, err := get(url)
+func (wc webClient) DownloadImage(url string) (string, error) {
+	res, err := wc.get(url)
 	if err != nil {
 		return "", err
 	}
