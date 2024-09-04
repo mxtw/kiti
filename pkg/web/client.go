@@ -3,8 +3,8 @@ package web
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 )
@@ -28,7 +28,7 @@ func (wc webClient) get(url string) (*http.Response, error) {
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 	}
 
 	if wc.UserAgent != "" {
@@ -40,11 +40,11 @@ func (wc webClient) get(url string) (*http.Response, error) {
 
 	res, err := client.Do(req)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return nil, errors.New("something went wrong://")
 	}
 	if res.StatusCode != 200 {
-		fmt.Println(res.Status)
+		log.Println(res.Status)
 		return nil, errors.New(res.Status)
 	}
 
@@ -60,7 +60,7 @@ func (wc webClient) GetData(url string, out interface{}) error {
 
 	err = json.NewDecoder(res.Body).Decode(&out)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 	}
 
 	defer res.Body.Close()

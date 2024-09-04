@@ -3,6 +3,7 @@ package reddit
 import (
 	"errors"
 	"fmt"
+	"log"
 
 	"github.com/mxtw/kiti/pkg/util"
 	"github.com/mxtw/kiti/pkg/web"
@@ -33,7 +34,7 @@ func GetRandomUrlFromSubreddit(subreddit string) (string, error) {
 	var reddit redditData
 	err := wc.GetData(url, &reddit)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return "", errors.New("problem while fetching data from source")
 	}
 

@@ -1,8 +1,7 @@
 package cmd
 
 import (
-	"fmt"
-	"os"
+	"log"
 
 	"github.com/mxtw/kiti/pkg/sources/imgur"
 	"github.com/mxtw/kiti/pkg/sources/reddit"
@@ -28,30 +27,25 @@ var (
 			case "reddit":
 				url, err = reddit.GetRandomUrlFromSubreddit(searchString)
 				if err != nil {
-					fmt.Println(err)
-					// FIXME
-					os.Exit(1)
+					log.Fatal(err)
 				}
 			case "imgur":
 
 				if imgurClientId == "" {
-					fmt.Println("source imgur requires the `--clientid` flag to be set")
-					os.Exit(1)
+					log.Fatal("source imgur requires the `--clientid` flag to be set")
 				}
 
 				url, err = imgur.GetRandomUrlFromTag(searchString, imgurClientId)
 				if err != nil {
-					fmt.Println(err)
-					// FIXME
-					os.Exit(1)
+					log.Fatal(err)
 				}
 			default:
-				fmt.Println("invalid source")
+				log.Fatal("invalid source")
 			}
 
 			err = wallpaper.SetFromUrl(url)
 			if err != nil {
-				fmt.Println(err)
+				log.Fatal(err)
 			}
 		},
 	}
@@ -88,7 +82,6 @@ func init() {
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		log.Fatal(err)
 	}
 }

@@ -1,7 +1,7 @@
 package util
 
 import (
-	"fmt"
+	"log"
 	"math/rand"
 	"regexp"
 )
@@ -11,7 +11,7 @@ func IsFileValid(input string) bool {
 	// TODO more robust check in the future maybe?
 	re, err := regexp.Compile(".*.(jpeg|jpg|png)$")
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 	}
 	return re.Match([]byte(input))
 }

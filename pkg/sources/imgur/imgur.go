@@ -3,6 +3,7 @@ package imgur
 import (
 	"errors"
 	"fmt"
+	"log"
 
 	"github.com/mxtw/kiti/pkg/util"
 	"github.com/mxtw/kiti/pkg/web"
@@ -34,7 +35,7 @@ func GetRandomUrlFromTag(tag string, clientId string) (string, error) {
 	var response imgurData
 	err := wc.GetData(url, &response)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return "", errors.New("problem while fetching data from source")
 	}
 
