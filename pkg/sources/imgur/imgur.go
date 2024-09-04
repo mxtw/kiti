@@ -42,7 +42,9 @@ func GetRandomUrlFromTag(tag string, clientId string) (string, error) {
 
 	for _, item := range response.Data.Items {
 		for _, image := range item.Images {
-			pictures = append(pictures, image.Link)
+			if util.IsFileValid(image.Link) {
+				pictures = append(pictures, image.Link)
+			}
 		}
 	}
 
